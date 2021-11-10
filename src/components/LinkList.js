@@ -5,14 +5,17 @@ import gql from 'graphql-tag'
 
 
 export const FEED_QUERY = gql`
-  {
-    feed {
+  query FeedQuery(
+    $take: Int
+    $skip: Int
+    $orderBy: LinkOrderByInput
+  ) {
+    feed(take: $take, skip: $skip, orderBy: $orderBy) {
+      id
       links {
         id
-        createdAt
         url
         description
-
         postedBy {
           id
           name
@@ -23,11 +26,12 @@ export const FEED_QUERY = gql`
             id
           }
         }
-
+        createdAt
       }
+      count
     }
   }
-`
+`;
 
 
 class LinkList extends Component {
