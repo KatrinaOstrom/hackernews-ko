@@ -7,7 +7,7 @@ class Hi extends Component {
   render(){
     const authToken = localStorage.getItem(AUTH_TOKEN)
     return(
-        <h1 className="Hello"> my name is (name) </h1>
+        <h1 className="Hello"> my name is {name} </h1>
     )
   }
 }
