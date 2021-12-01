@@ -75,6 +75,7 @@ const LinkList = () => {
     variables: getQueryVariables(isNewPage, page)
   });
 
+
   return (
     <>
       {loading && <p>Loading...</p>}
