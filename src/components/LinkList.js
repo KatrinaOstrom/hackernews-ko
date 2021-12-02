@@ -20,6 +20,7 @@ export const FEED_QUERY = gql`
         postedBy {
           id
           name
+          group
         }
         votes {
           id
@@ -126,3 +127,6 @@ const LinkList = () => {
 };
 
 export default LinkList;
+
+
+// to make changes: database in schema.prisma, then GraphQl in schema.graphQL, then LinkList.js, then restart the 4000

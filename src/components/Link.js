@@ -3,13 +3,11 @@ import { AUTH_TOKEN } from '../constants'
 import { timeDifferenceForDate } from '../utils'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-
 const VOTE_MUTATION = gql`
   mutation VoteMutation($linkId: ID!) {
     vote(linkId: $linkId) {
       id
       link {
-        id
         votes {
           id
           user {
@@ -23,6 +21,7 @@ const VOTE_MUTATION = gql`
     }
   }
 `
+
 class Link extends Component {
   render() {
     const authToken = localStorage.getItem(AUTH_TOKEN)
@@ -57,10 +56,20 @@ class Link extends Component {
               ? this.props.link.postedBy.name
               : 'Unknown'}{' '}
             {timeDifferenceForDate(this.props.link.createdAt)}  {' '}
-  {/* below ternary operator check if any votes, shows last voter   vote[0] is the last vote!*/}
+
+    {/* shows the group */}
+            {'Group: '} {this.props.link.postedBy.group}
+
+    {/* below ternary operator check if any votes, shows last voter */}
             {this.props.link.votes[0] 
-              ? ' ____ vote ids: first '+this.props.link.votes[0].id + ' last ' + this.props.link.votes[this.props.links.votes.length-1].id
+              ? ' ____ last voter: '+this.props.link.votes[0].user.name
               : ' '}
+
+            {/*  {this.props.link.votes[0] 
+              ? ' ____ vote ids: first '+this.props.link.votes[0].id + ' last ' + this.props.link.votes[this.props.links.votes.length-1].id
+            : ' '}  */}
+
+
           </div>
         </div>
       </div>
