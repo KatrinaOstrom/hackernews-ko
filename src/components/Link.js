@@ -57,12 +57,11 @@ class Link extends Component {
               : 'Unknown'}{' '}
             {timeDifferenceForDate(this.props.link.createdAt)}  {' '}
 
-    {/* shows the group */}
-            {'Group: '} {this.props.link.postedBy.group}
+   
 
     {/* below ternary operator check if any votes, shows last voter */}
             {this.props.link.votes[0] 
-              ? ' ____ last voter: '+this.props.link.votes[0].user.name
+              ? ' ____ last voter: '+this.props.link.votes[0].user.name+'  __ id:'+this.props.link.votes[0].id
               : ' '}
 
             {/*  {this.props.link.votes[0] 

@@ -12,6 +12,7 @@ model Link {
   createdAt   DateTime @default(now())
   description String
   url         String
+  tag         String @default("fun")
   postedBy    User     @relation(fields: [postedById], references: [id])
   postedById  Int
   votes       Vote[]
@@ -22,7 +23,6 @@ model User {
   name     String
   email    String @unique
   password String
-  group    Int @default(1)
   links    Link[]
   votes    Vote[]
 }
