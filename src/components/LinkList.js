@@ -16,11 +16,11 @@ export const FEED_QUERY = gql`
       links {
         id
         url
+        tag
         description
         postedBy {
           id
           name
-          group
         }
         votes {
           id

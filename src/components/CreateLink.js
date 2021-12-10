@@ -4,11 +4,12 @@ import gql from 'graphql-tag'
 import { FEED_QUERY } from './LinkList'
 import { LINKS_PER_PAGE } from '../constants'
 const POST_MUTATION = gql`
-  mutation PostMutation($description: String!, $url: String!) {
-    post(description: $description, url: $url) {
+  mutation PostMutation($description: String!, $url: String!, $tag: String) {
+    post(description: $description, url: $url, tag: $tag) {
       id
       createdAt
       url
+      tag
       description
     }
   }
@@ -18,10 +19,11 @@ class CreateLink extends Component {
   state = {
     description: '',
     url: '',
+    tag: '',
   }
 
   render() {
-    const { description, url } = this.state
+    const { description, url, tag } = this.state
     return (
       <div>
         <div className="flex flex-column mt3">
@@ -39,10 +41,19 @@ class CreateLink extends Component {
             type="text"
             placeholder="The URL for the link"
           />
+
+          <input
+            className="mb2"
+            value={tag}
+            onChange={e => this.setState({ tag: e.target.value })}
+            type="text"
+            placeholder="tag here"
+          />
+
         </div>
         <Mutation
   mutation={POST_MUTATION}
-  variables={{ description, url }}
+  variables={{ description, url, tag }}
   onCompleted={() => this.props.history.push('/new/1')}
   update={(store, { data: { post } }) => {
     const first = LINKS_PER_PAGE
