@@ -25,11 +25,13 @@ class Login extends Component {
     password: '',
     name: '',
   }
+//TERNARY OPERATOR is {condition ? if its true : if its false}
 
   render() {
     const { login, email, password, name } = this.state
     return (
       <div>
+      
         <h4 className="mv3">{login ? 'Login' : 'Sign Up'}</h4>
         <div className="flex flex-column">
           {!login && (
