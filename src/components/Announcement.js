@@ -18,7 +18,7 @@ class Announcement extends Component {
             {this.props.announcement.description}
         </div> 
 
-    
+        Date:
 
         <div className="ml1">
             {this.props.announcement.createdAt}
