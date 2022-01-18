@@ -18,13 +18,15 @@ class Announcement extends Component {
             {this.props.announcement.description}
         </div> 
 
-        <div className="ml1">
-            {this.props.announcement.postedBy}
-        </div> 
+    
 
         <div className="ml1">
             {this.props.announcement.createdAt}
         </div> 
+
+        <div className="ml1">
+            {this.props.user.id}
+        </div>
 
 
 

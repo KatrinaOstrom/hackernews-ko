@@ -39,9 +39,9 @@ type AuthPayload {
 }
 
 type Announcement {
+  id: ID!
   description: String!
   createdAt: DateTime!
-  postedBy: User
 }
 
 type User {

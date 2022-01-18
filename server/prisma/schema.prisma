@@ -20,8 +20,8 @@ model Link {
 
 
 model Announcement {
+  id          Int      @id @default(autoincrement())
   description String
-  postedBy    User     @relation(fields: [postedById], references: [id])
   createdAt   DateTime @default(now())
 
   

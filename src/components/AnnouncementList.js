@@ -14,6 +14,8 @@ export const FEED_QUERY = gql`
       id
         announcements{
             description
+            id
+            createdAt
             
         }
     }
