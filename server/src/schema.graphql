@@ -13,10 +13,12 @@ type Feed {
   links: [Link!]!
   count: Int!
   users: [User!]!
+  announcements: [Announcement!]!
 }
 
 type Mutation {
   post(url: String!, description: String!, tag: String): Link!
+  postAnnouncement(description: String!): Announcement!
   signup(
     email: String!
     password: String!
@@ -34,6 +36,12 @@ type Subscription {
 type AuthPayload {
   token: String
   user: User
+}
+
+type Announcement {
+  description: String!
+  createdAt: DateTime!
+  postedBy: User
 }
 
 type User {

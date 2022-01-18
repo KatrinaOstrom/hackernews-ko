@@ -36,6 +36,17 @@ class Header extends Component {
   users
 </Link>
 
+<div className="ml1">|</div>
+<Link to="/announcements" className="ml1 no-underline black">
+  announcements
+</Link>
+
+
+<div className="ml1">|</div>
+<Link to="/createannouncement" className="ml1 no-underline black">
+  createannouncement
+</Link>
+
 
   {authToken && (
     <div className="flex">

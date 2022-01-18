@@ -18,6 +18,15 @@ model Link {
   votes       Vote[]
 }
 
+
+model Announcement {
+  description String
+  postedBy    User     @relation(fields: [postedById], references: [id])
+  createdAt   DateTime @default(now())
+
+  
+}
+
 model User {
   id       Int    @id @default(autoincrement())
   name     String
