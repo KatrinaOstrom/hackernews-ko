@@ -5,6 +5,7 @@ async function feed(parent, args, context, info) {
           { description: { contains: args.filter } },
           { url: { contains: args.filter } },
           { tag: { contains: args.filter } }
+
         ]
       }
     : {};
@@ -16,11 +17,14 @@ async function feed(parent, args, context, info) {
     orderBy: args.orderBy
   });
 
+  const users = await context.prisma.user.findMany();
+
   const count = await context.prisma.link.count({ where });
 
   return {
     id: 'main-feed',
     links,
+    users, 
     count
   };
 }
@@ -28,3 +32,7 @@ async function feed(parent, args, context, info) {
 module.exports = {
   feed
 };
+
+
+
+

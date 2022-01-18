@@ -6,6 +6,7 @@ import CreateLink from './CreateLink'
 import Login from './Login'
 import Search from './Search'
 import Hi from './Hi'
+import UserList from './UserList'
 
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
             <Route exact path='/top' component={LinkList} />
             <Route exact path='/new/:page' component={LinkList} />
             <Route exact path='/hi' component={Hi} />
+            <Route exact path='/users' component={UserList}/>
           </Switch>
         </div>
       </div>

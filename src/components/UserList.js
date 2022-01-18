@@ -1,10 +1,9 @@
 import React from 'react'
-import Link from './Link'
+import User from './User'
 import { useQuery } from 'react-apollo'
 import { useHistory } from 'react-router';
 import gql from 'graphql-tag'
 import { LINKS_PER_PAGE } from '../constants';
-
 export const FEED_QUERY = gql`
   query FeedQuery(
     $take: Int
@@ -13,39 +12,29 @@ export const FEED_QUERY = gql`
   ) {
     feed(take: $take, skip: $skip, orderBy: $orderBy) {
       id
-      links {
-        id
-        url
-        tag
-        description
-        postedBy {
-          id
-          name
-        }
-        votes {
-          id
-          user {
+        users{
             id
             name
-          }
         }
-        createdAt
-      }
-      count
     }
   }
 `;
 
-const getLinksToRender = (isNewPage, data) => {
-  if (isNewPage) {
-    return data.feed.links;
+/* to get the data on users: 
+  {
+    feed{
+    	users{
+      	id
+      	name
+    	}
+  	}
   }
-  const rankedLinks = data.feed.links.slice();
-  rankedLinks.sort(
-    (l1, l2) => l2.votes.length - l1.votes.length
-  );
-  return rankedLinks;
-};
+  
+*/
+
+const getLinksToRender = (data) => {
+    return data.feed.users;
+  }
 
 const getQueryVariables = (isNewPage, page) => {
   const skip = isNewPage ? (page - 1) * LINKS_PER_PAGE : 0;
@@ -83,42 +72,14 @@ const UserList = () => {
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {data && (
         <>
-          {getLinksToRender(isNewPage, data).map(
-            (link, index) => (
-              <Link
-                key={link.id}
-                link={link}
+          {getLinksToRender(data).map(
+            (user, index) => (
+              <User
+                key={user.id}
+                user={user}
                 index={index + pageIndex}
               />
             )
-          )}
-          {isNewPage && (
-            <div className="flex ml4 mv3 gray">
-              <div
-                className="pointer mr2"
-                onClick={() => {
-                  if (page > 1) {
-                    history.push(`/new/${page - 1}`);
-                  }
-                }}
-              >
-                Previous
-              </div>
-              <div
-                className="pointer"
-                onClick={() => {
-                  if (
-                    page <=
-                    data.feed.count / LINKS_PER_PAGE
-                  ) {
-                    const nextPage = page + 1;
-                    history.push(`/new/${nextPage}`);
-                  }
-                }}
-              >
-                Next
-              </div>
-            </div>
           )}
         </>
       )}
