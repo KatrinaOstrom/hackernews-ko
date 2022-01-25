@@ -10,7 +10,6 @@ import UserList from './UserList'
 import AnnouncementList from './AnnouncementList'
 import CreateAnnouncement from './CreateAnnouncement'
 
-
 class App extends Component {
   render() {
     return (
@@ -25,10 +24,9 @@ class App extends Component {
             <Route exact path='/top' component={LinkList} />
             <Route exact path='/new/:page' component={LinkList} />
             <Route exact path='/hi' component={Hi} />
-            <Route exact path='/users' component={UserList}/>
-            <Route exact path='/announcements' component={AnnouncementList}/>
-            <Route exact path='/createannouncement' component={CreateAnnouncement}/>
-
+            <Route exact path='/users' component={UserList} />
+            <Route exact path='/announcements' component={AnnouncementList} />
+            <Route exact path='/createannouncement' component={CreateAnnouncement} />
           </Switch>
         </div>
       </div>
@@ -36,5 +34,4 @@ class App extends Component {
   }  
   
 }
-
 export default App

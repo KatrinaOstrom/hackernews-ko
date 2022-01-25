@@ -8,7 +8,6 @@ async function feed(parent, args, context, info) {
         ]
       }
     : {};
-
   const links = await context.prisma.link.findMany({
     where,
     skip: args.skip,
@@ -16,8 +15,10 @@ async function feed(parent, args, context, info) {
     orderBy: args.orderBy
   });
 
-  const users = await context.prisma.user.findMany();
-  const announcements = await context.prisma.announcement.findMany();
+  const users = await context.prisma.user.findMany({ where });
+
+  const announcements = await context.prisma.announcement.findMany({ where });
+  const pics = await context.prisma.pic.findMany({ where });
 
   const count = await context.prisma.link.count({ where });
 
@@ -26,10 +27,10 @@ async function feed(parent, args, context, info) {
     links,
     users,
     announcements,
-    count
+    count, 
+    pics
   };
 }
-
 module.exports = {
   feed
 };

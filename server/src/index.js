@@ -6,23 +6,25 @@ const Subscription = require('./resolvers/Subscription');
 const User = require('./resolvers/User');
 const Link = require('./resolvers/Link');
 const Vote = require('./resolvers/Vote');
+const Announcement = require('./resolvers/Announcement');
+const Pic = require('./resolvers/Pic');
+
 const fs = require('fs');
 const path = require('path');
 const { getUserId } = require('./utils');
-
 const pubsub = new PubSub();
-
 const prisma = new PrismaClient({
   errorFormat: 'minimal'
 });
-
 const resolvers = {
   Query,
   Mutation,
   Subscription,
   User,
   Link,
-  Vote
+  Announcement,
+  Vote, 
+  Pic
 };
 
 const server = new ApolloServer({
@@ -60,7 +62,6 @@ const server = new ApolloServer({
     }
   }
 });
-
 server
   .listen()
   .then(({ url }) =>
