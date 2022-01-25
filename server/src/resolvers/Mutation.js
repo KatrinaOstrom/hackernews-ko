@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { APP_SECRET, getUserId } = require('../utils');
+
 function post(parent, args, context, info) {
   const { userId } = context;
   const newLink = context.prisma.link.create({
@@ -30,6 +31,25 @@ function announcement(parent, args, context, info) {
 
   return newAnnouncement;
 }
+
+
+function pic(parent, args, context, info) {
+  const { userId } = context;
+
+  const newPic = context.prisma.pic.create({
+    data: {
+      url: args.url,
+      tag: args.tag,
+      description: args.description,
+      postedBy: { connect: { id: userId } }
+    }
+  });
+  context.pubsub.publish('NEW_PIC', newPic);
+
+  return newPic;
+}
+
+
 
 async function signup(parent, args, context, info) {
   const password = await bcrypt.hash(args.password, 10);
@@ -92,5 +112,6 @@ module.exports = {
   signup,
   login,
   announcement,
-  vote
+  vote,
+  pic
 }; 

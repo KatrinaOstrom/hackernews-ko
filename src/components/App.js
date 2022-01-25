@@ -9,6 +9,8 @@ import Hi from './Hi'
 import UserList from './UserList'
 import AnnouncementList from './AnnouncementList'
 import CreateAnnouncement from './CreateAnnouncement'
+import PicList from './PicList'
+import CreatePic from './CreatePic'
 
 class App extends Component {
   render() {
@@ -26,6 +28,9 @@ class App extends Component {
             <Route exact path='/hi' component={Hi} />
             <Route exact path='/users' component={UserList} />
             <Route exact path='/announcements' component={AnnouncementList} />
+            <Route exact path='/pics' component={PicList} />
+            <Route exact path='/newpic' component={CreatePic} />
+
             <Route exact path='/createannouncement' component={CreateAnnouncement} />
           </Switch>
         </div>
